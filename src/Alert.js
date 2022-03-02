@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect } from "react";
 
-const Alert = props => {
-  return <h2>Component alert</h2>
-}
+const Alert = ({ type, msg, removeAlert }) => {
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      removeAlert();
+    }, 3000);
+    return () => clearInterval(timeout);
+  }, [removeAlert]);
+  return <p className={`alert alert-${type}`}>{msg}</p>;
+};
 
 export default Alert;
